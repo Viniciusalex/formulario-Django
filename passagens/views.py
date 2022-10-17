@@ -1,3 +1,15 @@
+from multiprocessing import context
+from django import forms
 from django.shortcuts import render
+from passagens.forms import PassagemForms
 
-# Create your views here.
+def index(request):
+    form = PassagemForms()
+    contexto = {'form': form} 
+    return render(request, 'index.html', contexto)
+
+def revisao_passagem(request):
+    if request.method =='POST':
+        form = PassagemForms(request.POST)
+        contexto = {'form': form} 
+        return render(request, 'revisao_passagem.html', contexto)
