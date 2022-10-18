@@ -7,6 +7,7 @@ from datetime import datetime
 from passagens.classes_viagem import tipos_de_classes
 
 class PassagemForms(forms.Form):
+    nome_sobrenome = forms.CharField(label='Nome e sobrenome', max_length=100)
     origem  = forms.CharField(label='Origem', max_length=100)
     destino = forms.CharField(label='Destino', max_length=100)
     data_ida = forms.DateField(label='Ida', widget=DatePicker)
