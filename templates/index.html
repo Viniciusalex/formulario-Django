@@ -1,15 +1,21 @@
 {% extends "_base.html" %}
 {% block content %}
-
+{% load widget_tweaks %}  <!-- para carregar meu app widget_tweaks-->
+<section class="container col-8">  <!-- classe para diminuir tamanho e colocar dentro de um container -->
     <form action="{% url 'revisao_passagem' %}" method="post">
         {% csrf_token %}
         {% for field in form.visible_fields %}
-        <div class="form-group">
+        <div class="form-group"> <!-- classe para agrupar dados do formulario -->
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{field}}
+            {{field|add_class:'form-control'}}
         </div>
+        {% for error in field.errors %}
+        <section class="alert alert-danger" role="alert">
+            {{ field.errors }}
+        </section>
         {% endfor %}
-        <input type="submit" value="OK" class="btn btn-success">
+        {% endfor %}
+        <input type="submit" value="OK" class="btn btn-success"> <!-- classe para modificar o butao -->
     </form>
-
+</section>
 {% endblock %}
